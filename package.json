@@ -1,0 +1,146 @@
+{
+  "name": "coc-translate",
+  "version": "0.1.0",
+  "description": "translate extension for coc.nvim",
+  "author": "Jee Wan Gue <jeewangue@gmail.com>",
+  "homepage": "https://github.com/jeewangue/coc-translate",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeewangue/coc-translate.git"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "keywords": [
+    "vim",
+    "neovim",
+    "coc.nvim",
+    "translate",
+    "amazon-translate"
+  ],
+  "engines": {
+    "coc": "^0.0.80"
+  },
+  "scripts": {
+    "lint": "eslint src --ext ts",
+    "clean": "rimraf lib",
+    "watch": "node esbuild.js --watch",
+    "build": "node esbuild.js",
+    "prepare": "node esbuild.js"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120,
+    "semi": true
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "coc-translate configuration",
+      "properties": {
+        "translate.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable coc-translate extension"
+        },
+        "translate.logLevel": {
+          "type": "string",
+          "default": "debug",
+          "enum": [
+            "trace",
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "fatal",
+            "off"
+          ],
+          "description": "logging level of coc-translate"
+        },
+        "translate.timeout": {
+          "type": "number",
+          "default": 5000,
+          "description": "timeout for request in milliseconds."
+        },
+        "translate.providers": {
+          "type": "array",
+          "default": [
+            "google"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "google",
+              "aws"
+            ]
+          }
+        },
+        "translate.proxy": {
+          "type": "string",
+          "default": "",
+          "description": "Address of proxy, i.e., `socks://127.0.0.1:1081`"
+        },
+        "translate.aws.formality": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "formal",
+            "informal",
+            "none"
+          ],
+          "description": "The formality level of the output text and the option to mask profane words and phrases."
+        },
+        "translate.aws.sourceLanguageCode": {
+          "type": "string",
+          "default": "auto",
+          "description": "The language code for the language of the source text. To have Amazon Translate determine the source language of your text, you can specify <code>auto</code>"
+        },
+        "translate.aws.targetLanguageCode": {
+          "type": "string",
+          "default": "en",
+          "description": "The language code requested for the language of the target text."
+        },
+        "translate.google.host": {
+          "type": "string",
+          "default": "translate.googleapis.com",
+          "description": "The host of google translate api, i.e., `translate.googleapis.com`"
+        },
+        "translate.google.sourceLanguageCode": {
+          "type": "string",
+          "default": "auto",
+          "description": "The language code for the language of the source text."
+        },
+        "translate.google.targetLanguageCode": {
+          "type": "string",
+          "default": "en",
+          "description": "The language code requested for the language of the target text."
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@aws-sdk/client-translate": "^3.186.0",
+    "@aws-sdk/node-http-handler": "^3.186.0",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "coc-helper": "^0.15.2",
+    "coc.nvim": "^0.0.82",
+    "esbuild": "^0.15.10",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "got": "^12.5.2",
+    "http-proxy-agent": "^5.0.0",
+    "https-proxy-agent": "^5.0.1",
+    "lodash-es": "^4.17.21",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "socks-proxy-agent": "^7.0.0",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {}
+}
